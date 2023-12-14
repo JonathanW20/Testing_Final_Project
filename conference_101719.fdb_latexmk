@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1702575652 "c:/Users/jonat/OneDrive - University of Utah/Desktop/Testing_Final_Project/conference_101719.tex" "conference_101719.pdf" "conference_101719" 1702575652 0
-  "C:/Users/jonat/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1692675378 82507 a9eef8696c92627b87e9975edea03b2a ""
+["pdflatex"] 1702576615 "c:/Users/jonat/OneDrive - University of Utah/Desktop/Testing_Final_Project/conference_101719.tex" "conference_101719.pdf" "conference_101719" 1702576616 0
+  "C:/Users/jonat/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1702576110 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/jonat/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1692675370 24120579 d2b96a8bfa2a397aa07e1016a7742f3f ""
   "C:/Users/jonat/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458470287 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
   "C:/Users/jonat/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136765053 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -75,9 +75,9 @@
   "C:/Users/jonat/AppData/Local/Programs/MiKTeX/tex/latex/psnfss/ot1ptm.fd" 1585250178 1007 15056f4a61917ceed3a44e4ac11fcc52 ""
   "C:/Users/jonat/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1656233290 56148 51a9a8571c07b9921892ae11063ae853 ""
   "IEEEtran.cls" 1702599560 281957 5b2e4fa15b0f7eabb840ebf67df4c0f7 ""
-  "c:/Users/jonat/OneDrive - University of Utah/Desktop/Testing_Final_Project/conference_101719.tex" 1702575651 14067 e775b32e90326cbae274f06858c84744 ""
-  "conference_101719.aux" 1702575652 2224 7f9bb5cf68ad6d56f021fe8e1f4ff923 "pdflatex"
-  "conference_101719.tex" 1702575651 14067 e775b32e90326cbae274f06858c84744 ""
+  "c:/Users/jonat/OneDrive - University of Utah/Desktop/Testing_Final_Project/conference_101719.tex" 1702576614 10311 6cf4b1f1f54de3fcb7cecdbc8bbe463b ""
+  "conference_101719.aux" 1702576616 1674 eee1ce6e181ba7cee99ed094bc042237 "pdflatex"
+  "conference_101719.tex" 1702576614 10311 6cf4b1f1f54de3fcb7cecdbc8bbe463b ""
   "fig1.png" 1702599560 4535 0e284ca354e1b5c77378d3dfdb543874 ""
   (generated)
   "conference_101719.aux"
