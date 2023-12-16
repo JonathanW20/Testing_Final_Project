@@ -40,3 +40,5 @@ ideal J0 = a_0^2-a_0, a_1^2-a_1, a_2^2-a_2, b_0^2-b_0, b_1^2-b_1, b_2^2-b_2;
 ideal Jm = f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, fm, spec;
 
 groebner(Jm+J0);
+
+exit;

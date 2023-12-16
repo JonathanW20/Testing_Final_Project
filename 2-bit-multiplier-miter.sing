@@ -82,3 +82,5 @@ printf("");
 printf("You should introduce a bug, as shown in poly f5, and recompute \
 GB(J) and see for yourself the output G. If G is not equal to {1}, \
 then variety is non-empty, i.e. solutions exist to ideal J.");
+
+exit;
