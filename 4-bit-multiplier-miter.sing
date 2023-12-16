@@ -1,0 +1,41 @@
+ring r = (2, X), (Z_s, Z, A, B, t, z_0, z_1, z_2, r_0, r_1, r_2, r_3, r_4, r_5, r_6, r_7, r_8, r_9, r_10, r_11, a_0, a_1, a_2, a_3, b_0, b_1, b_2, b_3), lp;
+
+minpoly = X^4 + X + 1; // possibly more up to X^8?
+
+poly spec = Z_s - A*B;
+
+poly f1 = r_0 + a_0*b_0;
+poly f2 = r_1 + a_1*b_2;
+poly f3 = r_2 + a_2*b_1;
+//poly f = r_3 + a_3*b_0;
+//poly f = r_3 + a_3*b_1;
+
+poly f4 = r_3 + a_0*b_1;
+poly f5 = r_4 + a_1*b_0;
+poly f6 = r_5 + a_1*b_2;
+poly f7 = r_6 + a_2*b_1;
+poly f8 = r_7 + a_2*b_2;
+
+poly f9 = r_8 + a_0*b_2;
+poly f10 = r_9 + a_1*b_1;
+poly f11 = r_10 + a_2*b_0;
+poly f12  = r_11 + a_2*b_2;
+
+// big multi-input XOR gates
+poly f13 = z_0 + r_0 + r_1 + r_2;
+poly f14 = z_1 + r_3 + r_4 + r_5 + r_6 + r_7;
+poly f15 = z_2 + r_8 + r_9 + r_10 + r_11;
+
+poly f16 = A + a_0 + a_1*X + a_2*X^2 + a_3*X^3;
+poly f17 = B + b_0 + b_1*X + b_2*X^2 + b_3*X^3;
+poly f18 = Z + z_0 + z_1*X + z_2*X^2 + z_3*X^3; // possibly + z_4*X^4+z_5*X^5+z_6*X^6+z_7*X^7
+
+// miter poly
+
+poly fm = (Z-Z_s)*t - 1;
+
+ideal J0 = a_0^2-a_0, a_1^2-a_1, a_2^2-a_2, a_3^2-a_3, b_0^2-b_0, b_1^2-b_1, b_2^2-b_2, b_3^2-b_3;
+
+ideal Jm = f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, fm, spec; //should be more
+
+groebner(Jm+J0);
