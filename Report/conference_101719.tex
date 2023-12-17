@@ -55,15 +55,16 @@ polynomials, ideals, multiplier circuit
 \section{Introduction}
 The paper presents the testing and verification of a 2-bit, 3-bit, 16-bit, and 32-bit integer multiplier circuit. We manually 
 designed the 2-bit and 3 bit multiplier from scratch and derived a polynomial spec. We generated the larger circuits utilizing 
-the ABC synthesis tool. 
+the ABC synthesis tool.
 
 \section{Approach}
 Our approach to generate the 2-bit and 3-bit multiplier is simple for circuit generation,. We added on to the 2-bit multiplier 
 provided by Dr. Kalla using the GEdit text editor. Then ran on command line in VMA RedHat Linux. For the larger 16-bit and 32-bit 
 circuits, we generated the circuits using the ABC synthesis tool shown in Fig. 1. 
-\begin{figure}
-    \centerline{\includegraphics{fig1.png}}
-    \caption{Steps to generate a 16-bit circuit}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.34]{32bit_abc.png}
+    \caption{Steps to generate a 32-bit circuit in ABC.}
     \label{fig}
 \end{figure}
 
