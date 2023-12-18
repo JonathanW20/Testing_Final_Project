@@ -79,7 +79,7 @@ The ABC tool can be found on Alan's [website](https://people.eecs.berkeley.edu/~
 
 ### Singular
 Singular can be downloaded from this [website](https://www.singular.uni-kl.de/) then follow these steps: 
-1. In the directory of your Singular file run Singular
+1. Run Singular in the same directory of the Singular file
    ```sh
    Singular
    ```
