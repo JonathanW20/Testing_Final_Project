@@ -2,15 +2,13 @@
 <a name="readme-top"></a>
 
 <!-- PROJECT LOGO -->
+<h3 align="center">Formal Verification of Integer Multiplier Circuits</h3>
 <br />
 <div align="center">
   <a href="https://github.com/github_username/repo_name">
     <img src="4-bit multiplier.jpg" alt="Logo">
   </a>
-
-<h3 align="center">Formal Verification of Integer Multiplier Circuits</h3>
 </div>
-
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
