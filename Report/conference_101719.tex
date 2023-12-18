@@ -1,12 +1,13 @@
 \documentclass[conference]{IEEEtran}
 \IEEEoverridecommandlockouts
-% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{algorithm}
+\usepackage{algorithmic}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -66,26 +67,54 @@ We manually designed the 2-bit and 3-bit multiplier from scratch and generated t
 convert the blif files to sing files using our parsing python script. Then derived the RTTO (Reverse Topological Term Order) from the circuit, and used it to
 represent the minimal Gröbner Basis. The circuit is verified if the Gröbner Basis of $J$ + $J_{0}$ equals 0.
 
+\section{Process}
+% the algorithms or techniques that you have studied, and you should demonstrate parts of your main contribution/study using example circuits, designs or code fragments
+% may need to add more sections
+
 \section{Algorithms and Techniques}
 Techniques for ideal membership testing: 
 \begin{enumerate}
     \item Setup the verification formulation over the polynomial ring R. 
     \item Declare a specification polynomial from the circuit $f_{spec}$.
     \item Derive the polynomials from the gates of the circuit \{$f_{1}$, ..., $f_{s}$\}. 
-    \item Set ideal J = $f_{1}$, ..., $f_{s}$. 
-    % what is J0 in our case? 
+    \item Set ideal J = $f_{1}$, ...,$f_{s}$.     % what is J0 in our case? 
     \item Create the ideal of vanishing polynomials for each variable J0 = 
-    \item Take the Gröbner Basis of J + J0 = G.  
-    \item Divide $f_{spec}$ by G and see if the remainder is 0. 
-    \item It is a member if it's 0. 
+    \item Take the Gröbner Basis: G = GB(J + $J_{0}$).  
+    \item The circuit implements \(f_{\text{spec}}\) \(\Longleftrightarrow\) \(f_{\text{spec}} \in (J + J_0)\) if and only if \(f_{\text{spec}}\)
+    is divisible by G
 \end{enumerate}
-The steps to run Singular and abc are in the README. 
+The steps to run Singular, ABC, and the Python script are in the README. 
 
 \section{Software implementations}
 We implemented a Python function with assistance from ChatGPT to convert blif files to sing files. The code defines a gate mapping dictionary that maps gate types 
 from the blif file to their corresponding names in Singular. It iterates through and searches for lines starting with '.gate' and extracts the gate type and its 
 inputs, parsing and separating them accordingly into the Singular file. Additionally, we added code for error handling because the Singular file was empty when 
-testing the code.   
+experimenting. 
+\begin{algorithm}
+    \caption{Convert BLIF to Singular}
+    \begin{algorithmic}
+        \IF{content EXISTS}
+            \STATE map gates
+            \FOR{each line in blif file}
+                \IF{line STARTS WITH ".gate"}
+                    \STATE gate\_type, gate\_inputs $\gets$ PARSE line
+                    \IF{gate\_type EXISTS IN gate\_map}
+                        \STATE Generate Singular code based on gate\_type and gate\_inputs
+                    \ENDIF
+                \ENDIF
+            \ENDFOR
+            \IF{singular\_code is NOT EMPTY}
+                \STATE WRITE singular\_code TO output\_file\_path
+                \STATE PRINT "Singular code written to output\_file\_path"
+            \ELSE
+                \STATE PRINT "No valid Singular code generated. Check the BLIF file content."
+            \ENDIF
+        \ELSE
+            \STATE PRINT "File 'file\_path' not found."
+        \ENDIF
+        \STATE \textbf{END FUNCTION}
+    \end{algorithmic}
+    \end{algorithm}
 
 \section{Concepts learned}
 - Mathematical Ideals
@@ -95,14 +124,17 @@ testing the code.
 - Miters
 
 \section{Labour Division}
-Jonathan: a bit \\
-Henry: absolutely nothing -- JDubs \\
-Garrett: a bit \\
-Dmitri: a bit
+\begin{itemize}
+    \item Jonathan: Generated the blif files and converted it to Singular files and wrote the report
+    \item Henry: Debugged Python Code 
+    \item Garrett: Help write the report
+    \item Dmitri: Provided Singular code for 2-bit and 3-bit multipliers and visuals
+\end{itemize}
 
-\begin{thebibliography}{00}
+\begin{thebibliography}{03}
 \bibitem{b1} D. Ritirc, A. Biere and M. Kauers, "Column-wise verification of multipliers using computer algebra," 2017 Formal Methods in Computer Aided Design (FMCAD), Vienna, Austria, 2017, pp. 23-30, doi: 10.23919/FMCAD.2017.8102237.
 \bibitem{b2} T. Pruss, P. Kalla and F. Enescu, "Efficient Symbolic Computation for Word-Level Abstraction From Combinational Circuits for Verification Over Finite Fields," in IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems, vol. 35, no. 7, pp. 1206-1218, July 2016, doi: 10.1109/TCAD.2015.2501301.
+\bibitem{b3} Jerry R. Burch. 1991. Using BDDs to verify multipliers. In Proceedings of the 28th ACM/IEEE Design Automation Conference (DAC '91). Association for Computing Machinery, New York, NY, USA, 408–412. https://doi.org/10.1145/127601.127703
 \end{thebibliography}
 \vspace{12pt}
 
