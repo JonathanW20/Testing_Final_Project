@@ -34,7 +34,7 @@ The ABC tool can be found on Alan's [website](https://people.eecs.berkeley.edu/~
    ```sh
    ./abc
    ```
-3. Generate the .blif file
+3. Generate the .blif file(Replace the second N with the number of bits)
    ```sh
    gen -N N -m NBitMult.blif
    ```
@@ -75,12 +75,16 @@ The ABC tool can be found on Alan's [website](https://people.eecs.berkeley.edu/~
    ```sh
    python blifToSing.py
    ```
-3. .sing file will be in the same directory as the Python Script
+3. Singular file will be in the same directory as the Python Script
 
 ### Singular
 Singular can be downloaded from this [website](https://www.singular.uni-kl.de/) then follow these steps: 
-1. In the terminal type: 
+1. In the directory of your Singular file run Singular
    ```sh
    Singular
    ```
-2. STUFF
+2. Run the Singular file
+    ```sh
+   <"FileName.sing"; 
+   ```
+3. Read the outputs
