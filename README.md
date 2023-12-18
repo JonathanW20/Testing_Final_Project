@@ -26,15 +26,15 @@ Additionally, it provides the process of the ideal membership test using Gröbne
 The ABC tool can be found on Alan's [website](https://people.eecs.berkeley.edu/~alanmi/abc/). To generate a N bit circuit in the ABC synthesis tool(lib2.gen lib located 
 [here](https://my.ece.utah.edu/~kalla/ECE6745/DEMO/lib2.genlib)): 
 <!--*-->
-1. Locate the directory of ABC. 
+1. Locate the directory of ABC
    ```sh
    cd directory_of_ABC
    ```
-2. Run the executable file. 
+2. Run the executable file
    ```sh
    ./abc
    ```
-3. Generate the .blif file. 
+3. Generate the .blif file
    ```sh
    gen -N N -m NBitMult.blif
    ```
@@ -53,17 +53,13 @@ The ABC tool can be found on Alan's [website](https://people.eecs.berkeley.edu/~
    ```sh
    dch
    ```
-8. Read the genlib library. 
+8. Read the genlib library
    ```sh
    read lib2.genlib
    ```
 8. Map 
    ```sh
-   Map
-   ```
-9. Read the genlib library. 
-   ```sh
-   read lib2.genlib
+   map
    ```
 10. Write the final .blif file
    ```sh
@@ -71,16 +67,15 @@ The ABC tool can be found on Alan's [website](https://people.eecs.berkeley.edu/~
    ```
 
 ### Python Script
-1. Locate the directory of the python script. 
+1. Locate the directory of the python script
    ```sh
    cd directory_of_script
    ```
 2. Run the Script
-
    ```sh
    python blifToSing.py
    ```
-3. .sing file will be in the same directory as the Python Script. 
+3. .sing file will be in the same directory as the Python Script
 
 ### Singular
 Singular can be downloaded from this [website](https://www.singular.uni-kl.de/) then follow these steps: 
