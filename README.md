@@ -19,7 +19,7 @@ This project aims to test and verify the efficiency of integer multiplier circui
 <!-- ARCHIVE -->
 ## Archive
 This GitHub repository includes the information and files required to test and verify a 2-bit, 3, bit, 16-bit, and 32-bit multipliers. The report describes our approach and process to test the circuits.
-Additionally, it provides the process of the ideal membership test using Gröbner Basis and RTTO (Reverse Topological Term Order). It also includes the pseudocode to convert blif files to Singualr files. The steps to download and run the scripting tools are provided below. 
+Additionally, it provides the process of the ideal membership test using Gröbner Basis and RTTO (Reverse Topological Term Order). It also includes the Python pseudocode to convert blif files to Singualr files. The steps to download and run the scripting tools are provided below. 
 
 <!-- Scripts-->
 ## Running Scripts
