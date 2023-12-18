@@ -2,7 +2,7 @@
 <a name="readme-top"></a>
 
 <!-- PROJECT LOGO -->
-<h5 align="center">Formal Verification of Integer Multiplier Circuits</h5>
+<h1 align="center">Formal Verification of Integer Multiplier Circuits</h1>
 <br />
 <div align="center">
   <a href="https://github.com/JonathanW20/Testing_Final_Project">
