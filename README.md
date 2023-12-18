@@ -5,15 +5,10 @@
 <br />
 <div align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="4-bit multiplier.jpg" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Formal Verification of Integer Multiplier Circuits</h3>
-
-  <p align="center">
-    project_description
-    <br />
-  </p>
 </div>
 
 
@@ -24,46 +19,74 @@
 
 Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 <!-- Scripts-->
 ## Running Scripts
 
-### Prerequisites
-To generate a N bit circuit in the ABC synthesis tool(lib2.gen lib located here): 
+### ABC Tool
+To generate a N bit circuit in the ABC synthesis tool(lib2.gen lib located [here](https://my.ece.utah.edu/~kalla/ECE6745/DEMO/lib2.genlib)): 
 <!--*-->
-  ```sh
-  cd directory_of_ABC
-  ./abc
-  gen -N N -m NBitMult.blif
-  strash
-  ifraig
-  resyn2
-  dch
-  read lib2.genlib
-  map
-  write_blif MappedNBitMult.blif
-  ```
-
-### Installation
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Locate the directory of ABC. 
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   cd directory_of_ABC
    ```
-3. Install NPM packages
+2. Run the executable file. 
    ```sh
-   npm install
+   ./abc
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+3. Generate the .blif file. 
+   ```sh
+   gen -N N -m NBitMult.blif
+   ```
+4. Strash
+   ```sh
+   strash
+   ```
+5. ifraig
+   ```sh
+   ifraig
+   ```
+6. resyn2
+   ```sh
+   resyn2
+7. dch
+   ```sh
+   dch
+   ```
+8. Read the genlib library. 
+   ```sh
+   read lib2.genlib
+   ```
+8. Map 
+   ```sh
+   Map
+   ```
+9. Read the genlib library. 
+   ```sh
+   read lib2.genlib
+   ```
+10. Write the final .blif file
+   ```sh
+     write_blif MappedNBitMult.blif
    ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+### Python Script
+1. Locate the directory of the python script. 
+   ```sh
+   cd directory_of_script
+   ```
+2. Run the Script
 
+   ```sh
+   python blifToSing.py
+   ```
+3. .sing file will be in the same directory as the Python Script. 
+
+### Singular
+1. In any folder type in: 
+   ```sh
+   Singular
+   ```
+2. STUFF
 
 
 <!-- USAGE EXAMPLES -->
@@ -93,38 +116,3 @@ Don't forget to give the project a star! Thanks again!
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
-[contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
-[forks-url]: https://github.com/github_username/repo_name/network/members
-[stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
-[stars-url]: https://github.com/github_username/repo_name/stargazers
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
-[issues-url]: https://github.com/github_username/repo_name/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
-[license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
-[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 
