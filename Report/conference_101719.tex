@@ -53,44 +53,52 @@ polynomials, ideals, multiplier circuit
 \end{IEEEkeywords}
 
 \section{Introduction}
-The paper presents the testing and verification of a 2-bit, 3-bit, 16-bit, and 32-bit integer multiplier circuit. We manually 
-designed the 2-bit and 3 bit multiplier from scratch and derived a polynomial spec. We generated the larger circuits utilizing 
-the ABC synthesis tool.
+In the field of digital circuit design, integer multiplier circuits stand as fundamental components with critical applications in various computing 
+systems, ranging from embedded devices to high-performance computing architectures. The accurate and efficient operation of these multiplier 
+circuits is crucial for ensuring the reliability and correctness of arithmetic computations. As technology advances and design complexities 
+escalate, the need for rigorous verification methodologies has become increasingly pronounced to guarantee the integrity of digital circuits. Our 
+project tests and verifies an these integer multiplier circuits by employing the various methods studied in class on smaller circuits and circuits over
+fields.
 
 \section{Approach}
-Our approach to generate the 2-bit and 3-bit multiplier is simple for circuit generation,. We added on to the 2-bit multiplier 
-provided by Dr. Kalla using the GEdit text editor. Then ran on command line in VMA RedHat Linux. For the larger 16-bit and 32-bit 
-circuits, we generated the circuits using the ABC synthesis tool shown in Fig. 1. 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[scale = 0.34]{32bit_abc.png}
-    \caption{Steps to generate a 32-bit circuit in ABC.}
-    \label{fig}
-\end{figure}
+Ideal membership testing is a great method to test and verify of a 2-bit, 3-bit, 16-bit, and 32-bit integer multiplier circuit.
+We manually designed the 2-bit and 3-bit multiplier from scratch and generated the larger circuits utilizing the ABC synthesis tool. Next we
+convert the blif files to sing files using our parsing python script. Then derived the RTTO (Reverse Topological Term Order) from the circuit, and used it to
+represent the minimal Gröbner Basis. The circuit is verified if the Gröbner Basis of $J$ + $J_{0}$ equals 0.
 
 \section{Algorithms and Techniques}
-Before you begin to format your paper, first write and save the content as a 
-separate text file. Complete all content and organizational editing before 
-formatting. Please note sections  below for more information on 
-proofreading, spelling and grammar.
+Techniques for ideal membership testing: 
+\begin{enumerate}
+    \item Setup the verification formulation over the polynomial ring R. 
+    \item Declare a specification polynomial from the circuit $f_{spec}$.
+    \item Derive the polynomials from the gates of the circuit \{$f_{1}$, ..., $f_{s}$\}. 
+    \item Set ideal J = $f_{1}$, ..., $f_{s}$. 
+    % what is J0 in our case? 
+    \item Create the ideal of vanishing polynomials for each variable J0 = 
+    \item Take the Gröbner Basis of J + J0 = G.  
+    \item Divide $f_{spec}$ by G and see if the remainder is 0. 
+    \item It is a member if it's 0. 
+\end{enumerate}
+The steps to run Singular and abc are in the README. 
 
 \section{Software implementations}
-Before you begin to format your paper, first write and save the content as a 
-separate text file. Complete all content and organizational editing before 
-formatting. Please note sections  below for more information on 
-proofreading, spelling and grammar.
+We implemented a Python function with assistance from ChatGPT to convert blif files to sing files. The code defines a gate mapping dictionary that maps gate types 
+from the blif file to their corresponding names in Singular. It iterates through and searches for lines starting with '.gate' and extracts the gate type and its 
+inputs, parsing and separating them accordingly into the Singular file. Additionally, we added code for error handling because the Singular file was empty when 
+testing the code.   
 
 \section{Concepts learned}
-Before you begin to format your paper, first write and save the content as a 
-separate text file. Complete all content and organizational editing before 
-formatting. Please note sections  below for more information on 
-proofreading, spelling and grammar.
+- Mathematical Ideals
+- Gröbner Basis
+- .blif to .sing conversion
+- Ideal Membership testing
+- Miters
 
 \section{Labour Division}
-Jonathan: a lot \\
-Henry: a lot \\
-Garrett: a lot \\
-Dmitri: a lot
+Jonathan: a bit \\
+Henry: absolutely nothing -- JDubs \\
+Garrett: a bit \\
+Dmitri: a bit
 
 \begin{thebibliography}{00}
 \bibitem{b1} D. Ritirc, A. Biere and M. Kauers, "Column-wise verification of multipliers using computer algebra," 2017 Formal Methods in Computer Aided Design (FMCAD), Vienna, Austria, 2017, pp. 23-30, doi: 10.23919/FMCAD.2017.8102237.
