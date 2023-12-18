@@ -3,7 +3,7 @@ def convert_multiplier_blif_to_singular(file_path):
         gate_map = {
             'nand2': 'nand',
             'inv1x': 'not',
-            'xor2': 'xor'
+            'xor': 'xor'
         }
 
         with open(file_path, 'r') as file:
@@ -23,7 +23,7 @@ def convert_multiplier_blif_to_singular(file_path):
                         singular_code += f"{gate_inputs[2]} = {singular_gate}({gate_inputs[0]}, {gate_inputs[1]});\n"
                     elif gate_type == 'inv1x':
                         singular_code += f"{gate_inputs[0]} = {singular_gate}({gate_inputs[1]});\n"
-                    elif gate_type == 'xor2':
+                    elif gate_type == 'xor':
                         singular_code += f"{gate_inputs[2]} = {singular_gate}({gate_inputs[0]}, {gate_inputs[1]});\n"
 
         if singular_code:

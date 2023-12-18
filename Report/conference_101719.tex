@@ -8,6 +8,7 @@
 \usepackage{xcolor}
 \usepackage{algorithm}
 \usepackage{algorithmic}
+\usepackage{listings}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -69,8 +70,32 @@ represent the minimal Gröbner Basis. The circuit is verified if the Gröbner Ba
 
 \section{Process}
 % the algorithms or techniques that you have studied, and you should demonstrate parts of your main contribution/study using example circuits, designs or code fragments
-% include pseudocode for singular files
-% may need to add more sections
+\subsection{Singular}
+The Singular file consists of a ring, polynomials, ideals, and other code to help interpret the output. A ring is defined by their properties, 
+including the type of coefficients, the number and names of variables, and the arithmetic operations. The order of the inputs and outputs in 
+the ring R should be outputs, internal gate outputs, and inputs. A poly represents the algebraic representation of logic gate in the circuit. 
+For example, $f_{spec}$ represents the desired mathematical functionality of the implemented circuit. Ideals are subset of the polynomial ring 
+that consists of all polynomials that satisfy certain conditions. Below is the pseudo code for an integer arithmetic circuit.
+\begin{algorithm}
+    \caption{Example Singular code for arithmetic circuit}
+    \begin{algorithmic}
+        \STATE // Declare ring
+        \STATE ring R = 0, (outputs, internal outputs, inputs), lp;
+        \STATE
+        \STATE // Declare $f_{spec}$ and polys of internal gates
+        \STATE poly $f_{spec}$ = equations of circuit;
+        \STATE poly $f_{4}$ = $z_{0}$ - $s_{0}$ - $e_{0}$ + 2*$s_{0}$*$e_{0}$; 
+        \STATE Continue to model logic gates over Q
+        \STATE
+        \STATE // Declare ideals
+        \STATE ideal J = f4, f5,  f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16;
+        \STATE ideal J0 = vanishing polynomials;
+        \STATE
+        \STATE Use groebner($J$ + $J_{0}$) to find the Gröbner Basis
+        \STATE
+        \STATE Use NF($f_{spec}$, $J$ + $J_{0}$, 1); for membership test
+    \end{algorithmic}
+\end{algorithm}
 
 \section{Algorithms and Techniques}
 Techniques for ideal membership testing: 
@@ -86,7 +111,7 @@ Techniques for ideal membership testing:
 \end{enumerate}
 The steps to run Singular, ABC, and the Python script are in the README. 
 
-\section{Software implementations}
+\section{Software implementations} % needs to fix pseudocode cuz it doesnt work 
 We implemented a Python function with assistance from ChatGPT to convert blif files to sing files. The code defines a gate mapping dictionary that maps gate types 
 from the blif file to their corresponding names in Singular. It iterates through and searches for lines starting with '.gate' and extracts the gate type and its 
 inputs, parsing and separating them accordingly into the Singular file. Additionally, we added code for error handling because the Singular file was empty when 
@@ -94,42 +119,82 @@ experimenting.
 \begin{algorithm}
     \caption{Convert BLIF to Singular}
     \begin{algorithmic}
-        \IF{content EXISTS}
+        \IF{content exists}
             \STATE map gates
             \FOR{each line in blif file}
-                \IF{line STARTS WITH ".gate"}
-                    \STATE gate\_type, gate\_inputs $\gets$ PARSE line
+                \IF{line starts with ".gate"}
+                    \STATE gate\_type, gate\_inputs $\gets$ parse line
                     \IF{gate\_type EXISTS IN gate\_map}
                         \STATE Generate Singular code based on gate\_type and gate\_inputs
                     \ENDIF
                 \ENDIF
             \ENDFOR
             \IF{singular\_code is NOT EMPTY}
-                \STATE WRITE singular\_code TO output\_file\_path
-                \STATE PRINT "Singular code written to output\_file\_path"
+                \STATE write singular\_code TO output\_file\_path
+                \STATE print "Singular code written to output\_file\_path"
             \ELSE
-                \STATE PRINT "No valid Singular code generated. Check the BLIF file content."
+                \STATE print "No valid Singular code generated. Check the BLIF file content."
             \ENDIF
         \ELSE
-            \STATE PRINT "File 'file\_path' not found."
+            \STATE print "File 'file\_path' not found."
         \ENDIF
-        \STATE \textbf{END FUNCTION}
+        \STATE \textbf{end function}
     \end{algorithmic}
     \end{algorithm}
 
 \section{Concepts learned}
-- Mathematical Ideals
-- Gröbner Basis
-- .blif to .sing conversion
-- Ideal Membership testing
-- Miters
+\subsection{Mathematical Ideals}
+Ideals ensure the accuracy of electronic systems In circuit testing and verification. 
+Ideal membership testing involves using mathematical 
+models to assess whether a circuit aligns with specified ideal characteristics. 
+Engineers compare these models with real-world circuit implementations to identify 
+discrepancies to help detect potential faults in the design. This approach enhances 
+precision and provides a systematic framework for validating complex circuits, 
+contributing to the development of high-quality electronic systems.
+
+\subsection{Gröbner Basis}
+Gröbner Basis in-circuit testing and verification is a powerful method that 
+involves algebraic techniques to analyze and validate complex electronic systems. 
+Gröbner Bases provide a systematic way to address polynomial equations representing 
+circuit behaviors. Gröbner Bases are a fundamental concept in algebraic geometry and 
+computer algebra systems, and they play a crucial role in solving systems of polynomial 
+equations. The primary idea behind Gröbner Bases is to provide a systematic method for 
+transforming a set of polynomials into a more manageable and structured form.
+
+\subsection{blif to sing conversion}
+By using a python script to parse our mapped blif files (lib2.genlib), we 
+can convert the list of gates contained in the blif file to a list of 
+corresponding polynomials for our sing file. By splitting the blif file line by line and
+parsing for key words such as ".gate," "XOR," "NAND," and "INV" to create the different
+polynomial equations to model logic gates over Q. For example, "XOR" uses 
+the equation z - a - b + 2ab, and "AND" uses the equation z = a * b for the 
+corresponding polynomials. Python makes this very easy with its parsing functionalities. 
+
+\subsection{Ideal Membership Testing}
+Ideal membership testing is a mathematical approach used in circuit verification to 
+determine whether a given circuit satisfies ideal properties or conditions. 
+It involves algebraic structures known as ideals, particularly in the 
+context of polynomial rings. An ideal is a subset of the polynomial ring that consists 
+of all polynomials that satisfy certain conditions. In the context of circuit 
+verification, the ideal encapsulates the set of polynomials representing the 
+desired ideal behavior of the circuit. The core of the process involves determining 
+whether a given polynomial, representing the behavior of the actual circuit, belongs 
+to the ideal. If the polynomial is an element of the ideal, it indicates that the circuit 
+satisfies the ideal properties. Otherwise, it suggests a deviation from the expected behavior.
+
+\subsection{Miters}
+Miters play a crucial role in circuit testing and verification. A model of the circuit is integrated into 
+the testing process, allowing for comprehensive analysis. The miter compares the expected behavior with 
+the actual circuit response using an xor gate to highlighting any discrepancies based on the model. 
+By using miters, we can identify and address potential issues before moving to further stages of development 
+or production, ensuring that the circuit functions as intended.  
 
 \section{Labour Division}
 \begin{itemize}
     \item Jonathan: Generated the blif files and converted it to Singular files and wrote the report
     \item Henry: Debugged Python Code 
     \item Garrett: Help write the report
-    \item Dmitri: Provided Singular code for 2-bit and 3-bit multipliers and visuals
+    \item Dmitri: Provided Singular code for 2-bit,3-bit and 4-bit multipliers and visuals
 \end{itemize}
 
 \begin{thebibliography}{03}

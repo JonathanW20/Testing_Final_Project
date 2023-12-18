@@ -1,27 +1,5 @@
-// This file describes how to declare and instantiate a miter in an
-// algebraic framework. This singular file miters a 2-bit multiplier
-// circuit against a word-level spec.
-
-// Spec: GF(2^2), P(X) = X^2+X+1, Z = A*B (mod P(X))
-// Note (mod P(X)) is implicit, as everything in GF is (mod P(X))
-
-// Implementation is a 2-bit Mastrovito multiplier circuit. The
-// circuit is given in the gf.pdf slides, towards the end of the slide
-// set. I'm going to use the same variables names as given in my slides.
-
-// Variables of the ring:
-//
-// Word-level variables: Z_s for spec, Z (implementation) A, B inputs
-// Free variable: t
-// Bit level variables of the circuit:
-// a_0,a_1,b_0,b_1,s_0,s_1,s_2,s_3,r_0,z_0,z_1
-//
-
 // declare the ring
 ring r = (2, X), (Z_s, Z, A, B,a_0,a_1,b_0,b_1,s_0,s_1,s_2,s_3,r_0,z_0,z_1,t), lp;
-
-// Note how multi-variate rings are declared.
-// The last keyword 'lp' means that terms of polynomials are ordered lexicographically
 
 minpoly = X^2+X+1;
 
