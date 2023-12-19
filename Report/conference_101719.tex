@@ -51,7 +51,7 @@ verification process.
 \end{abstract}
 
 \begin{IEEEkeywords}
-polynomials, ideals, multiplier circuit
+polynomials, vanishing polynomials ($J_{0}$), ideals ($J$), multiplier circuit
 \end{IEEEkeywords}
 
 \section{Introduction}
@@ -63,19 +63,24 @@ project tests and verifies an these integer multiplier circuits by employing the
 fields.
 
 \section{Approach}
-Ideal membership testing is a great method to test and verify of a 2-bit, 3-bit, 16-bit, and 32-bit integer multiplier circuit.
-We manually designed the 2-bit and 3-bit multiplier from scratch and generated the larger circuits utilizing the ABC synthesis tool. Next we
-convert the blif files to sing files using our parsing python script. Then derived the RTTO (Reverse Topological Term Order) from the circuit, and used it to
-represent the minimal Gröbner Basis. The circuit is verified if the Gröbner Basis of $J$ + $J_{0}$ equals 0.
+Ideal membership testing is a great method to test and verify of a 2-bit, 3-bit, 4-bit integer multiplier circuit.
+We manually designed the 2-bit and 3-bit multiplier from scratch and generated the larger circuits utilizing the (.blif writing capabilities of the?) ABC synthesis tool. Next we
+converted the blif files to sing files using our parsing python script. The reverse topological term order (RTTO) was then derived from the circuit, and used to
+represent the minimal Gröbner Basis. In digital circuit verification, there are several approaches to ensure a multiplier circuit implementation performs the same function as its specification. The first 
+option could be creating a miter between the specification polynomials and the implementation, then checking if the Gröbner Basis (GB) is 1. Other approaches will be necessary at larger circuit sizes, 
+such as weak Nullensatz, where the GB of the ideals and vanishing polynomials is 1 (GB($J$ + $J_{0}$) = 1). Another form of verification is checking if the Gröbner Basis of 
+$J$ + $J_{0}$ equals 0 (GB($J$ + $J_{0}$) = 0).
 
 \section{Process}
 % the algorithms or techniques that you have studied, and you should demonstrate parts of your main contribution/study using example circuits, designs or code fragments
 \subsection{Singular}
-The Singular file consists of a ring, polynomials, ideals, and other code to help interpret the output. A ring is defined by their properties, 
-including the type of coefficients, the number and names of variables, and the arithmetic operations. The order of the inputs and outputs in 
-the ring R should be outputs, internal gate outputs, and inputs. A poly represents the algebraic representation of logic gate in the circuit. 
-For example, $f_{spec}$ represents the desired mathematical functionality of the implemented circuit. Ideals are subset of the polynomial ring 
-that consists of all polynomials that satisfy certain conditions. Below is the pseudo code for an integer arithmetic circuit.
+The Singular file consists of a ring, polynomials, ideals, and other code to define the behavior of a circuit and interpret its output. A ring is defined by properties, 
+including the type of coefficients, number and names of variables, and arithmetic operations. The ordering of the inputs and outputs in 
+the ring R should follow RTTO, consisting of the following order: outputs, internal gate outputs, primary inputs. A polynomial (poly) is the algebraic representation of the logic in the circuit.
+This can mean a poly is defined for each logic gate in the circuit, or a more complex poly may be used to represent the functions of groups of gates. 
+For example, $f_{spec}$ represents the desired mathematical functionality of the implemented circuit. Ideals are a subset of the polynomial ring 
+that consist of all polynomials satisfying certain conditions. Vanishing polynomials are polynomials over a ring which output 0 for all elements in the ring.
+ Below is pseudo code for an integer arithmetic circuit.
 \begin{algorithm}
     \caption{Example Singular code for arithmetic circuit}
     \begin{algorithmic}
@@ -83,19 +88,31 @@ that consists of all polynomials that satisfy certain conditions. Below is the p
         \STATE ring R = 0, (outputs, internal outputs, inputs), lp;
         \STATE
         \STATE // Declare $f_{spec}$ and polys of internal gates
-        \STATE poly $f_{spec}$ = equations of circuit;
+        \STATE poly $f_{spec}$ = specification equation of the circuit;
+        \STATE //$f_{4}$ is an example of a polynomial describing gate behavior
+        \STATE //z is an output, s and e are internal signals
+        \STATE //z = $s_{0}$ - $e_{0}$ + 2*$s_{0}$*$e_{0}$
         \STATE poly $f_{4}$ = $z_{0}$ - $s_{0}$ - $e_{0}$ + 2*$s_{0}$*$e_{0}$; 
-        \STATE Continue to model logic gates over Q
+        \STATE //Continue to model logic gates over Q
         \STATE
         \STATE // Declare ideals
         \STATE ideal J = f4, f5,  f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16;
         \STATE ideal J0 = vanishing polynomials;
         \STATE
-        \STATE Use groebner($J$ + $J_{0}$) to find the Gröbner Basis
+        \STATE //Finding Gröbner Basis of the ideals plus the vanishing polynomials
+        \STATE groebner($J$ + $J_{0}$);
         \STATE
-        \STATE Use NF($f_{spec}$, $J$ + $J_{0}$, 1); for membership test
+        \STATE //Membership test using a condition checking statement to explicitly state membership
+        \STATE NF($f_{spec}$, $J$ + $J_{0}$, 1);
+        \STATE //Can put a response here to print confirmation of membership
     \end{algorithmic}
 \end{algorithm}
+
+\subsection{Singular results for 2-bit, 3-bit, and 4-bit multipliers}
+
+
+
+
 
 \section{Algorithms and Techniques}
 Techniques for ideal membership testing: 
@@ -192,7 +209,7 @@ or production, ensuring that the circuit functions as intended.
 \section{Labour Division}
 \begin{itemize}
     \item Jonathan: Generated the blif files and converted it to Singular files and wrote the report
-    \item Henry: Debugged Python Code 
+    \item Henry: Debugged Python Code and helped write report
     \item Garrett: Help write the report
     \item Dmitri: Provided Singular code for 2-bit,3-bit and 4-bit multipliers and visuals
 \end{itemize}

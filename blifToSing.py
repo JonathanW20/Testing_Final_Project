@@ -1,43 +1,80 @@
-def convert_multiplier_blif_to_singular(file_path):
-    try:
-        gate_map = {
-            'nand2': 'nand',
-            'inv1x': 'not',
-            'xor': 'xor'
-        }
-
-        with open(file_path, 'r') as file:
-            lines = file.readlines()
-
-        singular_code = ''
-        for line in lines:
-            line = line.strip()
+def parse_blif_file(file_path):
+    gates, inputs, outputs = [], set(), set()
+    with open(file_path, 'r') as file:
+        for line in file:
             if line.startswith('.gate'):
                 parts = line.split()
                 gate_type = parts[1]
-                gate_inputs = [part.split('=')[1] for part in parts[2:]]
+                gate_inputs = [p.split('=')[1].replace('_', 'n') for p in parts[2:-1]]
+                gate_output = parts[-1].split('=')[1].replace('_', 'n')
+                gates.append((gate_type, gate_inputs, gate_output))
+                outputs.add(gate_output)
+                inputs.update(gate_inputs)
+            elif line.startswith('.inputs'):
+                inputs.update([i.replace('_', 'n') for i in line.split()[1:]])
+            elif line.startswith('.outputs'):
+                outputs.update([o.replace('_', 'n') for o in line.split()[1:]])
+    return gates, inputs - outputs, outputs
 
-                singular_gate = gate_map.get(gate_type)
-                if singular_gate:
-                    if gate_type == 'nand2':
-                        singular_code += f"{gate_inputs[2]} = {singular_gate}({gate_inputs[0]}, {gate_inputs[1]});\n"
-                    elif gate_type == 'inv1x':
-                        singular_code += f"{gate_inputs[0]} = {singular_gate}({gate_inputs[1]});\n"
-                    elif gate_type == 'xor':
-                        singular_code += f"{gate_inputs[2]} = {singular_gate}({gate_inputs[0]}, {gate_inputs[1]});\n"
 
-        if singular_code:
-            output_file_path = file_path.replace('.blif', '.sing')
-            with open(output_file_path, 'w') as output_file:
-                output_file.write(singular_code)
-            print(f"Singular code written to {output_file_path}")
-        else:
-            print("No valid Singular code generated. Check the BLIF file content.")
-    except FileNotFoundError:
-        print(f"File '{file_path}' not found.")
-    except Exception as e:
-        print(f"An error occurred: {e}")
+def topological_sort(gates, primary_inputs):
+    graph = {gate_output: set(gate_inputs) for _, gate_inputs, gate_output in gates}
+    order, visited = [], set()
+    
+    def visit(node):
+        if node not in visited:
+            visited.add(node)
+            if node in graph:
+                for n in graph[node]:
+                    visit(n)
+            order.append(node)
 
-# Example usage for a 4-bit multiplier BLIF file
-convert_multiplier_blif_to_singular('Mapped16BitMult.blif')
-# Replace '4bit_multiplier.blif' with the path to your 8-bit or 32-bit multiplier BLIF file
+    for output in graph:
+        visit(output)
+    return [o for o in order if o not in primary_inputs] + list(primary_inputs)
+
+def generate_ring_declaration(sorted_vars):
+    return f"ring r = 2, ({', '.join(sorted_vars)}), lp;"
+
+def write_singular_file(gates, sorted_vars, primary_inputs, ring_size, output_path):
+    with open(output_path, 'w') as file:
+        file.write("// Singular file generated from BLIF\n")
+        file.write(generate_ring_declaration(sorted_vars) + "\n")
+        poly_names = []
+        for i, (gate_type, inputs, output) in enumerate(gates):
+            poly_name = f"f{i}"
+            poly_names.append(poly_name)
+            poly = blif_gate_to_singular(gate_type, inputs, output)
+            file.write(f"poly {poly_name} = {poly};\n")
+
+        file.write(f"ideal J = {', '.join(poly_names)};\n")
+
+        # Generate and write the vanishing polynomials for primary inputs
+        exponent = ring_size + 1
+        vanishing_polys = [f"{var}^{exponent}-{var}" for var in primary_inputs]
+        file.write(f"ideal J0 = {', '.join(vanishing_polys)};\n")
+
+def blif_gate_to_singular(gate_type, inputs, output):
+    if gate_type == 'nand2':
+        return f"{output} - {inputs[0]} * {inputs[1]}"
+    elif gate_type == 'inv1x':
+        return f"{output} - 1 + {inputs[0]}"
+    elif gate_type == 'xor':
+        return f"{output} - {inputs[0]} - {inputs[1]} + 2 * {inputs[0]} * {inputs[1]}"
+    else:
+        raise ValueError(f"Unsupported gate type: {gate_type}")
+
+def main():
+    blif_file_path = input("Enter the path to the BLIF file: ")
+    output_singular_path = input("Enter the desired output path for the .sing file: ")
+
+    gates, primary_inputs, _ = parse_blif_file(blif_file_path)
+    sorted_vars = topological_sort(gates, primary_inputs)
+    
+    ring_size = 2  # Update this as needed for your specific use case
+
+    write_singular_file(gates, sorted_vars, primary_inputs, ring_size, output_singular_path)
+    print(f"Conversion complete. The .sing file has been saved to {output_singular_path}")
+
+if __name__ == "__main__":
+    main()
