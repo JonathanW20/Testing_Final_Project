@@ -1,12 +1,14 @@
+# ---------------------------------------------------------------------------------------------------------------------
+# Title: Python script to convert integer multipliers from BLIF to .sing with a little help from GPT
+# Authors: ChatGPT, Henry Silverman, Jonathan Wang, Garrett Slack, Dimitri Panin
+# University: University of Utah
+# Department: College of Electrical and Computer Engineering
+# Last Updated: December 19th, 2023
+# ---------------------------------------------------------------------------------------------------------------------
+
 def parse_blif_file(file_path):
     """
     Parses the BLIF file and extracts information about gates, inputs, and outputs.
-
-    Args:
-    file_path (str): Path to the BLIF file.
-
-    Returns:
-    tuple: A tuple containing a list of gates and sets of primary inputs and outputs.
     """
     gates, inputs, outputs = [], set(), set()
     with open(file_path, 'r') as file:
@@ -14,7 +16,6 @@ def parse_blif_file(file_path):
             if line.startswith('.gate'):
                 parts = line.split()
                 gate_type = parts[1]
-                # Replace 'new_n' with 'n' in inputs and output names
                 gate_inputs = [p.split('=')[1].replace('new_n', 'n') for p in parts[2:-1]]
                 gate_output = parts[-1].split('=')[1].replace('new_n', 'n')
                 gates.append((gate_type, gate_inputs, gate_output))
@@ -26,31 +27,59 @@ def parse_blif_file(file_path):
                 outputs.update([o.replace('new_n', 'n') for o in line.split()[1:]])
     return gates, inputs - outputs, outputs
 
-def topological_sort(gates, primary_inputs):
+def custom_sort(variables, primary_inputs, primary_outputs):
     """
-    Performs a reverse topological sort on the gates to determine the order of variables.
+    Custom sort for variables: primary outputs first, then others, with primary inputs last.
+    """
+    sorted_vars = sorted(variables, key=lambda x: (x not in primary_outputs, x in primary_inputs, x))
+    return sorted_vars
+# def topological_sort(gates, primary_inputs):
+#     """
+#     Performs a reverse topological sort on the gates to determine the order of variables.
 
-    Args:
-    gates (list): List of gates extracted from the BLIF file.
-    primary_inputs (set): Set of primary input variables.
+#     Args:
+#     gates (list): List of gates extracted from the BLIF file.
+#     primary_inputs (set): Set of primary input variables.
 
-    Returns:
-    list: Sorted list of variables in reverse topological order.
+#     Returns:
+#     list: Sorted list of variables in reverse topological order.
+#     """
+#     graph = {gate_output: set(gate_inputs) for _, gate_inputs, gate_output in gates}
+#     order, visited = [], set()
+    
+#     def visit(node):
+#         if node not in visited:
+#             visited.add(node)
+#             if node in graph:
+#                 for n in graph[node]:
+#                     visit(n)
+#             order.append(node)
+
+#     for output in graph:
+#         visit(output)
+#     return [o for o in order if o not in primary_inputs] + list(primary_inputs)
+
+
+def reverse_topological_sort(gates, primary_outputs, primary_inputs):
+    """
+    Performs a reverse topological sort on the gates starting from the primary outputs.
     """
     graph = {gate_output: set(gate_inputs) for _, gate_inputs, gate_output in gates}
-    order, visited = [], set()
-    
-    def visit(node):
+    order, visited, stack = [], set(), list(primary_outputs)
+
+    while stack:
+        node = stack.pop()
         if node not in visited:
             visited.add(node)
-            if node in graph:
-                for n in graph[node]:
-                    visit(n)
+            stack.extend(graph.get(node, []))
             order.append(node)
 
-    for output in graph:
-        visit(output)
-    return [o for o in order if o not in primary_inputs] + list(primary_inputs)
+    # Ensure that all primary inputs are included in the order
+    order.extend([inp for inp in primary_inputs if inp not in order])
+    return order
+    
+
+
 
 def generate_ring_declaration(sorted_vars):
     """
@@ -113,6 +142,21 @@ def write_singular_file(gates, sorted_vars, primary_inputs, ring_size, output_pa
         vanishing_polys = [f"{var}^{exponent}-{var}" for var in primary_inputs]
         file.write(f"ideal J0 = {', '.join(vanishing_polys)};\n")
 
+# def main():
+#     """
+#     Main function to orchestrate the conversion from BLIF to .sing format.
+#     """
+#     blif_file_path = input("Enter the path to the BLIF file: ")
+#     output_singular_path = input("Enter the desired output path for the .sing file: ")
+
+#     gates, primary_inputs, _ = parse_blif_file(blif_file_path)
+#     sorted_vars = topological_sort(gates, primary_inputs)
+    
+#     ring_size = 2  # Update this as needed for your specific use case
+
+#     write_singular_file(gates, sorted_vars, primary_inputs, ring_size, output_singular_path)
+#     print(f"Conversion complete. The .sing file has been saved to {output_singular_path}")
+        
 def main():
     """
     Main function to orchestrate the conversion from BLIF to .sing format.
@@ -120,13 +164,16 @@ def main():
     blif_file_path = input("Enter the path to the BLIF file: ")
     output_singular_path = input("Enter the desired output path for the .sing file: ")
 
-    gates, primary_inputs, _ = parse_blif_file(blif_file_path)
-    sorted_vars = topological_sort(gates, primary_inputs)
+    gates, primary_inputs, primary_outputs = parse_blif_file(blif_file_path)
+    all_vars = set.union(primary_inputs, primary_outputs, {output for _, _, output in gates})
+    sorted_vars = custom_sort(all_vars, primary_inputs, primary_outputs)
     
     ring_size = 2  # Update this as needed for your specific use case
 
     write_singular_file(gates, sorted_vars, primary_inputs, ring_size, output_singular_path)
     print(f"Conversion complete. The .sing file has been saved to {output_singular_path}")
+        
+
 
 if __name__ == "__main__":
     main()
