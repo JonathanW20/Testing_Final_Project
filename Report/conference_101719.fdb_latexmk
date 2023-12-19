@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1703018695 "c:/Users/jonat/OneDrive - University of Utah/Desktop/Testing_Final_Project/Report/conference_101719.tex" "conference_101719.pdf" "conference_101719" 1703018695 0
+["pdflatex"] 1703021263 "c:/Users/jonat/OneDrive - University of Utah/Desktop/Testing_Final_Project/Report/conference_101719.tex" "conference_101719.pdf" "conference_101719" 1703021264 0
   "C:/Users/jonat/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1702923428 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/jonat/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1692675370 24120579 d2b96a8bfa2a397aa07e1016a7742f3f ""
   "C:/Users/jonat/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458470287 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -80,9 +80,9 @@
   "C:/Users/jonat/AppData/Local/Programs/MiKTeX/tex/latex/psnfss/ts1ptm.fd" 1585250178 653 96f56dc5d1ef1fe1121f1cfeec70ee0c ""
   "C:/Users/jonat/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1656233290 56148 51a9a8571c07b9921892ae11063ae853 ""
   "IEEEtran.cls" 1702599560 281957 5b2e4fa15b0f7eabb840ebf67df4c0f7 ""
-  "c:/Users/jonat/OneDrive - University of Utah/Desktop/Testing_Final_Project/Report/conference_101719.tex" 1703018693 13490 c15092bbc070d53f26d67ac035486168 ""
-  "conference_101719.aux" 1703018695 1917 0d74416601d88daa758732394dcbf353 "pdflatex"
-  "conference_101719.tex" 1703018693 13490 c15092bbc070d53f26d67ac035486168 ""
+  "c:/Users/jonat/OneDrive - University of Utah/Desktop/Testing_Final_Project/Report/conference_101719.tex" 1703021263 13862 c83f1fcb8d83aeb1d132600382a11521 ""
+  "conference_101719.aux" 1703021263 1917 aeec519b85d3580ef1b727e4fe7b9430 "pdflatex"
+  "conference_101719.tex" 1703021263 13862 c83f1fcb8d83aeb1d132600382a11521 ""
   (generated)
   "conference_101719.aux"
   "conference_101719.log"
