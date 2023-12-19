@@ -75,7 +75,14 @@ The ABC tool can be found on Alan's [website](https://people.eecs.berkeley.edu/~
    ```sh
    python blifToSing.py
    ```
-3. Singular file will be in the same directory as the Python Script
+3. It will prompt you to type in the directory of your blif file
+   ```sh
+   Directory_of_blif_file
+   ```
+4. Prompts the directory of the desired Singular file 
+   ```sh
+   Directory_of_Singular_file
+   ```
 
 ### Singular
 Singular can be downloaded from this [website](https://www.singular.uni-kl.de/) then follow these steps: 

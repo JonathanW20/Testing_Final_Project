@@ -2,49 +2,73 @@ ring r = (2, X), (Zs, Z, A, B, t, z0, z1, z2, z3, z4, z5, z6, z7, a0, a1, a2, a3
 
 minpoly = X^4 + X + 1; // possibly more up to X^8?
 
-poly spec = Zs - A*B;
+poly spec = Zs - AB;
 
-poly f1 = z0 + a0*b0;
-poly f2 = s1 + a1*b0;
-poly f3 = s2 + a2*b0;
-poly f4 = s3 + a3*b0;
-poly f5 = s4 + b1*a0;
-poly f6 = s5 + b1*a1;
-poly f7 = s6 + b1*a2;
-poly f8 = s7 + b1*a3;
-poly f9 = s8 + b2*a0;
-poly f10 = s9 + b2*a1;
-poly f11 = s10 + b2*a2;
-poly f12 = s11 + b2*a3;
-poly f13 = s12 + b3*a0;
-poly f14 = s13 + b3*a1;
-poly f15 = s14 + b3*a2;
-poly f16 = s15 + b3*a3;
+poly f1 = z0 + a0b0;
+poly f2 = s1 + a1b0;
+poly f3 = s2 + a2b0;
+poly f4 = s3 + a3b0;
+poly f5 = s4 + b1a0;
+poly f6 = s5 + b1a1;
+poly f7 = s6 + b1a2;
+poly f8 = s7 + b1a3;
+poly f9 = s8 + b2a0;
+poly f10 = s9 + b2a1;
+poly f11 = s10 + b2a2;
+poly f12 = s11 + b2a3;
+poly f13 = s12 + b3a0;
+poly f14 = s13 + b3a1;
+poly f15 = s14 + b3a2;
+poly f16 = s15 + b3a3;
 
 poly f17 = s17 + s3 + s6 + c2;
-poly f18 = c3 + s6*s3 + s6*c2 + s3*c2;
+poly f18 = c3 + s6s3 + s6c2 + s3c2;
 poly f19 = s18 + s7 + c3;
-poly f20 = c4 + s7*c3;
+poly f20 = c4 + s7c3;
 poly f21 = z2 + s16 + s8;
-poly f22 = c5 + s8*s16;
+poly f22 = c5 + s8s16;
 poly f23 = s20 + s9 + s17 + c5;
-poly f24 = c6 + s9*s17 + s9*c5 + s17*c5;
+poly f24 = c6 + s9s17 + s9c5 + s17c5;
 poly f25 = s21 + s10 + s18 + c6;
-poly f26 = c7 + s10*s18 + s10*c6 + s18*c6;
+poly f26 = c7 + s10s18 + s10c6 + s18c6;
 poly f27 = s22 + s19 + s11 + c7;
-poly f28 = c8 + s19*s11 + s19*c7 + s11*c7;
+poly f28 = c8 + s19s11 + s19c7 + s11c7;
 poly f29 = z3 + s20 + s12;
-poly f30 = c9 + s20*s12;
+poly f30 = c9 + s20s12;
 poly f31 = z4 + s13 + s21 + c9;
-poly f32 = c10 + s13*s21 + s13*c9 + s21*c9;
-poly f33 = z5 + s14*s22 + c10;
-poly f34 = c11 + s14*s22 + s14*c10 + s22*c10;
+poly f32 = c10 + s13s21 + s13c9 + s21c9;
+poly f33 = z5 + s14s22 + c10;
+poly f34 = c11 + s14s22 + s14c10 + s22c10;
 poly f35 = z6 + s8 + s15 + c11;
-poly f36 = z7 + s8*s15 + s8*c11 + s15*c11;
+poly f36 = z7 + s8s15 + s8c11 + s15c11;
+poly f37 = A + a0 + a1X + a2X^2 + a3X^3;
+poly f38 = B + b0 + b1X + b2X^2 + b3X^3;
+poly f39 = Z + z0 + z1X + z2X^2 + z3X^3 + z4X^4 + z5X^5 + z6X^6 + z7X^7;
 
-poly fm = (Z-Zs)*t - 1;  //miter poly
+
+poly fm = (Z-Zs)t - 1;  //miter poly
 ideal J0 = a0^2-a0, a1^2-a1, a2^2-a2, a3^2-a3, b0^2-b0, b1^2-b1, b2^2-b2, b3^2-b3;
-ideal Jm = f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19, f20, f21, f22, f23, f24, f25, f26, f27, f28, f29, f30, f31, f32, f33, f34, f35, f36, fm, spec; 
-groebner(Jm + J0);
+ideal Jm = f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19, f20, f21, f22, f23, f24, f25, f26, f27, f28, f29, f30, f31, f32, f33, f34, f35, f36, fm, spec;
+
+printf("Jm+J0 = minimal GB even for integer arithmetic circuits");
+printf("Jm + J0 is:");
+Jm+J0;
+
+// Compute G_min
+printf("non reduced minimal GB(Jm+J0) is:");
+option(noredSB);
+groebner(Jm+J0);
+
+//Compute G_reduced
+//printf("reduced GB(Jm+J0) is:");
+//option(redSB);
+//groebner(Jm+J0);
+
+printf("Verification: f_spec mod (Jm+J0) should be 0");
+reduce(f_spec, Jm+J0);
+
+// Check if the polynomial is in the ideal
+printf("if circuit C implements f_spec then NF should be 0:");
+NF(f_spec,Jm+J0,1);
 
 exit;

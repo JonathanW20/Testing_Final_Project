@@ -59,12 +59,11 @@ In the field of digital circuit design, integer multiplier circuits stand as fun
 systems, ranging from embedded devices to high-performance computing architectures. The accurate and efficient operation of these multiplier 
 circuits is crucial for ensuring the reliability and correctness of arithmetic computations. As technology advances and design complexities 
 escalate, the need for rigorous verification methodologies has become increasingly pronounced to guarantee the integrity of digital circuits. Our 
-project tests and verifies an these integer multiplier circuits by employing the various methods studied in class on smaller circuits and circuits over
-fields.
+project tests and verifies these integer multiplier circuits by employing the various methods studied in class on smaller circuits and circuits over fields.
 
 \section{Approach}
-Ideal membership testing is a great method to test and verify of a 2-bit, 3-bit, 4-bit integer multiplier circuit.
-We manually designed the 2-bit and 3-bit multiplier from scratch and generated the larger circuits utilizing the (.blif writing capabilities of the?) ABC synthesis tool. Next we
+Ideal membership testing is a great method to test and verify a 2-bit, 3-bit, 4-bit integer multiplier circuit.
+We manually designed the 2-bit and 3-bit multiplier from scratch and generated the larger circuits utilizing the (.blif writing capabilities of the?) ABC synthesis tool. Next, we
 converted the blif files to sing files using our parsing python script. The reverse topological term order (RTTO) was then derived from the circuit, and used to
 represent the minimal Gröbner Basis. In digital circuit verification, there are several approaches to ensure a multiplier circuit implementation performs the same function as its specification. The first 
 option could be creating a miter between the specification polynomials and the implementation, then checking if the Gröbner Basis (GB) is 1. Other approaches will be necessary at larger circuit sizes, 
@@ -76,11 +75,11 @@ $J$ + $J_{0}$ equals 0 (GB($J$ + $J_{0}$) = 0).
 \subsection{Singular}
 The Singular file consists of a ring, polynomials, ideals, and other code to define the behavior of a circuit and interpret its output. A ring is defined by properties, 
 including the type of coefficients, number and names of variables, and arithmetic operations. The ordering of the inputs and outputs in 
-the ring R should follow RTTO, consisting of the following order: outputs, internal gate outputs, primary inputs. A polynomial (poly) is the algebraic representation of the logic in the circuit.
-This can mean a poly is defined for each logic gate in the circuit, or a more complex poly may be used to represent the functions of groups of gates. 
+the ring R should follow RTTO, consisting of the following order: outputs, internal gate outputs, and primary inputs. A polynomial (poly) is the algebraic representation of the logic in the circuit.
+This can mean a poly is defined for each logic gate in the circuit or a more complex poly may be used to represent the functions of groups of gates. 
 For example, $f_{spec}$ represents the desired mathematical functionality of the implemented circuit. Ideals are a subset of the polynomial ring 
-that consist of all polynomials satisfying certain conditions. Vanishing polynomials are polynomials over a ring which output 0 for all elements in the ring.
- Below is pseudo code for an integer arithmetic circuit.
+that consists of all polynomials satisfying certain conditions. Vanishing polynomials are polynomials over a ring that output 0 for all elements in the ring.
+Algorithm 1 shows the pseudo-code for an integer arithmetic circuit.
 \begin{algorithm}
     \caption{Example Singular code for arithmetic circuit}
     \begin{algorithmic}
@@ -108,7 +107,7 @@ that consist of all polynomials satisfying certain conditions. Vanishing polynom
     \end{algorithmic}
 \end{algorithm}
 
-\subsection{Singular results for 2-bit, 3-bit, and 4-bit multipliers}
+\subsection{Singular results for 2-bit, 4-bit, and 16-bit multipliers}
 
 
 
@@ -126,38 +125,58 @@ Techniques for ideal membership testing:
     \item The circuit implements \(f_{\text{spec}}\) \(\Longleftrightarrow\) \(f_{\text{spec}} \in (J + J_0)\) if and only if \(f_{\text{spec}}\)
     is divisible by G
 \end{enumerate}
-The steps to run Singular, ABC, and the Python script are in the README. 
+The steps to run Singular, ABC, and the Python script are provided in the README. 
 
 \section{Software implementations} % needs to fix pseudocode cuz it doesnt work 
 We implemented a Python function with assistance from ChatGPT to convert blif files to sing files. The code defines a gate mapping dictionary that maps gate types 
 from the blif file to their corresponding names in Singular. It iterates through and searches for lines starting with '.gate' and extracts the gate type and its 
 inputs, parsing and separating them accordingly into the Singular file. Additionally, we added code for error handling because the Singular file was empty when 
-experimenting. 
-\begin{algorithm}
-    \caption{Convert BLIF to Singular}
-    \begin{algorithmic}
-        \IF{content exists}
-            \STATE map gates
-            \FOR{each line in blif file}
-                \IF{line starts with ".gate"}
-                    \STATE gate\_type, gate\_inputs $\gets$ parse line
-                    \IF{gate\_type EXISTS IN gate\_map}
-                        \STATE Generate Singular code based on gate\_type and gate\_inputs
-                    \ENDIF
-                \ENDIF
-            \ENDFOR
-            \IF{singular\_code is NOT EMPTY}
-                \STATE write singular\_code TO output\_file\_path
-                \STATE print "Singular code written to output\_file\_path"
-            \ELSE
-                \STATE print "No valid Singular code generated. Check the BLIF file content."
-            \ENDIF
-        \ELSE
-            \STATE print "File 'file\_path' not found."
-        \ENDIF
-        \STATE \textbf{end function}
-    \end{algorithmic}
-    \end{algorithm}
+experimenting. Below is the pseudo-code for the Python file. 
+\begin{lstlisting}
+Function parse_blif_file(file_path):
+Initialize gates, inputs, and outputs
+  Open file_path
+    For each line in file:
+     If line starts with '.gate':
+     Parse gate type, inputs, and output
+     Replace 'new_n' with 'n' in input
+     Add gate information to gates
+     Update outputs and inputs set
+     If line starts with '.inputs':
+      Update inputs set
+     If line starts with '.outputs':
+      Update outputs set
+  Return gates, inputs-outputs, outputs
+    
+Function topological_sort:
+    Create a graph from gates
+    Initialize order and visited sets
+    Define topological sorting function
+    For each output in graph:
+     Visit(output)
+    Return sorted order
+    
+Function generate_ring_declaration:
+    Return ring declaration string
+    
+Function write_singular_file:
+    Open output_path file
+    Write ring declaration 
+    Wtite polynomial equations
+    Generate vanishing polynomials
+    Write ideal declarations
+    
+Function main():
+    Prompt user for BLIF file path
+    Prompt user for output path
+    Parse BLIF file
+    Perform topological sort on gates
+    Set ring size (default 2)
+    Write .sing file
+    Print completion message
+    
+Execute main()
+\end{lstlisting}
 
 \section{Concepts learned}
 \subsection{Mathematical Ideals}
