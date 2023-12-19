@@ -103,26 +103,39 @@ Algorithm 1 shows the pseudo-code for an integer arithmetic circuit.
         \STATE
         \STATE //Membership test using a condition checking statement to explicitly state membership
         \STATE NF($f_{spec}$, $J$ + $J_{0}$, 1);
-        \STATE //Can put a response here to print confirmation of membership
     \end{algorithmic}
 \end{algorithm}
 
 \subsection{Singular results for 2-bit, 4-bit, and 16-bit multipliers}
 First we tested the 2-bit multiplier for simplicity. If the Gröbner Basis of ideal {J} is 0 (empty), the variety of ideal {J} 
-is empty or the miter is infeasible, shown in Fig. 1. After introducing the bug(changing an AND gate to an OR gate), ideal {J} equals to 1, 
+is empty or the miter is infeasible, shown in Fig. 1. 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.5]{2-bit-GB1.png}
+    \caption{Gröbner Basis = 1 without any bugs.}
+\end{figure}
+After introducing the bug(changing an AND gate to an OR gate), ideal {J} equals to 1, 
 shown in Fig. 2. It means the variety is not empty, which also means solutions exist to ideal {J}.   
-
-
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.25]{2-bit-GB2.png}
+    \caption{Gröbner Basis = lots of polynomials = solutions exist.}
+\end{figure}
+Later, we introduced minimal and reduced Gröbner Basis for the larger 4-bit and 16-bit multiplier circuits. 
+A minimal Gröbner basis is a special case of a Gröbner Basis that has the fewest number of elements possible 
+while generating the same ideal. A reduced Gröbner Basis is a further refinement of the minimal Gröbner basis,
+which means the leading coefficient of each polynomial is 1 and no monomial of another polynomial  is divisible 
+by the leading monomial of another polynomial in the basis. 
 
 
 \section{Algorithms and Techniques}
 Techniques for ideal membership testing: 
 \begin{enumerate}
     \item Setup the verification formulation over the polynomial ring R. 
-    \item Declare a specification polynomial from the circuit $f_{spec}$.
+    \item Declare a specification polynomial from circuit $f_{spec}$.
     \item Derive the polynomials from the gates of the circuit \{$f_{1}$, ..., $f_{s}$\}. 
-    \item Set ideal J = $f_{1}$, ...,$f_{s}$.     % what is J0 in our case? 
-    \item Create the ideal of vanishing polynomials for each variable J0 = 
+    \item Set ideal J = $f_{1}$, ...,$f_{s}$.    
+    \item Create the ideal of vanishing polynomials for each variable $J_{0}$
     \item Take the Gröbner Basis: G = GB(J + $J_{0}$).  
     \item The circuit implements \(f_{\text{spec}}\) \(\Longleftrightarrow\) \(f_{\text{spec}} \in (J + J_0)\) if and only if \(f_{\text{spec}}\)
     is divisible by G
@@ -234,6 +247,9 @@ or production, ensuring that the circuit functions as intended.
     \item Garrett: Help write the report
     \item Dmitri: Provided Singular code for 2-bit,3-bit and 4-bit multipliers and visuals
 \end{itemize}
+
+\section{Conclusion}
+
 
 \begin{thebibliography}{03}
 \bibitem{b1} D. Ritirc, A. Biere and M. Kauers, "Column-wise verification of multipliers using computer algebra," 2017 Formal Methods in Computer Aided Design (FMCAD), Vienna, Austria, 2017, pp. 23-30, doi: 10.23919/FMCAD.2017.8102237.
