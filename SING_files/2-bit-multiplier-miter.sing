@@ -42,7 +42,7 @@ printf("");
 
 ideal G;
 G = groebner(J);
-printf("Groebner basis G of ideal J:");
+printf("Gröbner basis G of ideal J:");
 G;
 
 printf("If G = 1, then variety of ideal J\

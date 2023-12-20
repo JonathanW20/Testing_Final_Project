@@ -64,7 +64,7 @@ ideal J = groebner(Jm+J0);
 J
 printf("");
 
-//Compute G_reduced
+// Compute G_reduced
 // printf("Reduced GB(Jm+J0) is:");
 // option(redSB);
 // groebner(Jm+J0);
