@@ -63,7 +63,7 @@ project tests and verifies these integer multiplier circuits by employing the va
 
 \section{Approach}
 Ideal membership testing is a great method to test and verify any n-bit circuit.
-We manually designed the 2-bit and 3-bit multiplier and generated the larger circuits utilizing the (.blif writing capabilities of the?) ABC synthesis tool. Next, we
+We manually designed the 2-bit and 3-bit multiplier and generated the larger circuits utilizing the ABC synthesis tool. Next, we
 converted the blif files to sing files using our parsing python script. The reverse topological term order (RTTO) was then derived from the circuit, and used to
 represent the minimal Gröbner Basis. In digital circuit verification, there are several approaches to ensure a multiplier circuit implementation performs the same function as its specification. The first 
 option could be creating a miter between the specification polynomials and the implementation, then checking if the Gröbner Basis (GB) is 1. Other approaches will be necessary at larger circuit sizes, 
@@ -71,7 +71,6 @@ such as weak Nullstellensatz, where the GB of the ideals and vanishing polynomia
 polynomial $f_{\text{spec}}$ mod $\text{GB}(J + J_{0}) = 0$, i.e., the GB reduction of the spec modulo $J+J_{0}$ is $0$.
 
 \section{Singular}
-% the algorithms or techniques that you have studied, and you should demonstrate parts of your main contribution/study using example circuits, designs or code fragments
 \subsection{Singular}
 The Singular file consists of a ring, polynomials, ideals, and other code to define the behavior of a circuit and interpret its output. A ring is defined by properties, 
 including the type of coefficients, number and names of variables, and arithmetic operations. The ordering of the inputs and outputs in 

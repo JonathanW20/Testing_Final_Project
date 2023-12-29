@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1703809448 "/Users/jonathanw/Desktop/ECE/Testing_Final_Project/Report/conference_101719.tex" "conference_101719.pdf" "conference_101719" 1703809449 0
-  "/Users/jonathanw/Desktop/ECE/Testing_Final_Project/Report/conference_101719.tex" 1703809448 15605 efb18a48870e2b6662cd3bd8009f41b2 ""
+["pdflatex"] 1703810058 "/Users/jonathanw/Desktop/ECE/Testing_Final_Project/Report/conference_101719.tex" "conference_101719.pdf" "conference_101719" 1703810059 0
+  "/Users/jonathanw/Desktop/ECE/Testing_Final_Project/Report/conference_101719.tex" 1703810058 15399 ea4ff48caac0218c25e909df199731f4 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
@@ -85,8 +85,8 @@
   "2-bit-GB1.png" 1703807913 229147 6e71e4cbafb54ec765ed0fa27c88678a ""
   "2-bit-GB2.png" 1703807913 624825 470354369b559817e1ecc5569373eb07 ""
   "IEEEtran.cls" 1703807913 281957 5b2e4fa15b0f7eabb840ebf67df4c0f7 ""
-  "conference_101719.aux" 1703809449 2210 de2b0ab599ef9a8de13b3c56c202c302 "pdflatex"
-  "conference_101719.tex" 1703809448 15605 efb18a48870e2b6662cd3bd8009f41b2 ""
+  "conference_101719.aux" 1703810059 2210 de2b0ab599ef9a8de13b3c56c202c302 "pdflatex"
+  "conference_101719.tex" 1703810058 15399 ea4ff48caac0218c25e909df199731f4 ""
   (generated)
   "conference_101719.aux"
   "conference_101719.log"

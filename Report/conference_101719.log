@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.18)  28 DEC 2023 19:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.18)  28 DEC 2023 19:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -316,7 +316,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 <2-bit-GB1.png, id=1, 384.43625pt x 310.15875pt>
 File: 2-bit-GB1.png Graphic file (type png)
 <use 2-bit-GB1.png>
-Package pdftex.def Info: 2-bit-GB1.png  used on input line 114.
+Package pdftex.def Info: 2-bit-GB1.png  used on input line 113.
 (pdftex.def)             Requested size: 192.21765pt x 155.079pt.
  [1{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}
 
@@ -325,15 +325,15 @@ Package pdftex.def Info: 2-bit-GB1.png  used on input line 114.
 <2-bit-GB2.png, id=19, 1000.73875pt x 402.50375pt>
 File: 2-bit-GB2.png Graphic file (type png)
 <use 2-bit-GB2.png>
-Package pdftex.def Info: 2-bit-GB2.png  used on input line 122.
+Package pdftex.def Info: 2-bit-GB2.png  used on input line 121.
 (pdftex.def)             Requested size: 250.18408pt x 100.62569pt.
-LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 137.
+LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 136.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 137.
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 165.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 136.
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 164.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 ) [2 <./2-bit-GB2.png>]
@@ -358,7 +358,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  57i,8n,62p,428b,1514s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on conference_101719.pdf (3 pages, 500140 bytes).
+Output written on conference_101719.pdf (3 pages, 499905 bytes).
 PDF statistics:
  75 PDF objects out of 1000 (max. 8388607)
  43 compressed objects within 1 object stream
