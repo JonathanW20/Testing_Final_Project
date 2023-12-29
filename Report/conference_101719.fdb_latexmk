@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1703045871 "/Users/jonathanw/Desktop/ECE/Testing_Final_Project/Report/conference_101719.tex" "conference_101719.pdf" "conference_101719" 1703045873 0
-  "/Users/jonathanw/Desktop/ECE/Testing_Final_Project/Report/conference_101719.tex" 1703045871 15916 a7eb6e16d481788ed73f9ddc747a026b ""
+["pdflatex"] 1703809448 "/Users/jonathanw/Desktop/ECE/Testing_Final_Project/Report/conference_101719.tex" "conference_101719.pdf" "conference_101719" 1703809449 0
+  "/Users/jonathanw/Desktop/ECE/Testing_Final_Project/Report/conference_101719.tex" 1703809448 15605 efb18a48870e2b6662cd3bd8009f41b2 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
@@ -34,7 +34,6 @@
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb" 1248133631 32734 69e00a6b65cedb993666e42eedb3d48f ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1248133631 32762 224316ccc9ad3ca0423a14971cfa7fc1 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
-  "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb" 1248133631 32716 08e384dc442464e7285e891af9f45947 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb" 1136849748 44729 811d6c62865936705a31c797a1d5dada ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb" 1136849748 44656 0cbca70e0534538582128f6b54593cca ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb" 1136849748 46026 6dab18b61c907687b520c72847215a68 ""
@@ -83,11 +82,11 @@
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1681883786 4643545 a69824f37b6b485fa46da16b935e4a46 ""
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1681883837 7885258 b74393f7b59150cb9b6ba23602c73dcf ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
-  "2-bit-GB1.png" 1703021900 229147 6e71e4cbafb54ec765ed0fa27c88678a ""
-  "2-bit-GB2.png" 1703022262 624825 470354369b559817e1ecc5569373eb07 ""
-  "IEEEtran.cls" 1702930161 281957 5b2e4fa15b0f7eabb840ebf67df4c0f7 ""
-  "conference_101719.aux" 1703045872 2315 8b8a6cc2d5e3e43519fb060a02ccb7ea "pdflatex"
-  "conference_101719.tex" 1703045871 15916 a7eb6e16d481788ed73f9ddc747a026b ""
+  "2-bit-GB1.png" 1703807913 229147 6e71e4cbafb54ec765ed0fa27c88678a ""
+  "2-bit-GB2.png" 1703807913 624825 470354369b559817e1ecc5569373eb07 ""
+  "IEEEtran.cls" 1703807913 281957 5b2e4fa15b0f7eabb840ebf67df4c0f7 ""
+  "conference_101719.aux" 1703809449 2210 de2b0ab599ef9a8de13b3c56c202c302 "pdflatex"
+  "conference_101719.tex" 1703809448 15605 efb18a48870e2b6662cd3bd8009f41b2 ""
   (generated)
   "conference_101719.aux"
   "conference_101719.log"
